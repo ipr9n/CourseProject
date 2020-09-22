@@ -189,6 +189,9 @@
   <data name="email" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="english" xml:space="preserve">
+    <value>English</value>
+  </data>
   <data name="enter" xml:space="preserve">
     <value>Enter</value>
   </data>
@@ -201,6 +204,9 @@
   <data name="goto-collection" xml:space="preserve">
     <value>Enter collection</value>
   </data>
+  <data name="language" xml:space="preserve">
+    <value>Language</value>
+  </data>
   <data name="likes" xml:space="preserve">
     <value>Likes</value>
   </data>
@@ -209,6 +215,9 @@
   </data>
   <data name="logout" xml:space="preserve">
     <value>Logout</value>
+  </data>
+  <data name="main" xml:space="preserve">
+    <value>Main</value>
   </data>
   <data name="my-collections" xml:space="preserve">
     <value>My collections</value>
@@ -231,8 +240,14 @@
   <data name="repeatPassword" xml:space="preserve">
     <value>Repeat password</value>
   </data>
+  <data name="russian" xml:space="preserve">
+    <value>Russian</value>
+  </data>
   <data name="save" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="search" xml:space="preserve">
+    <value>Search</value>
   </data>
   <data name="secondName" xml:space="preserve">
     <value>Surname</value>

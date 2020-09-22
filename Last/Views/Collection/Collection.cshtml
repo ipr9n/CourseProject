@@ -8,7 +8,7 @@
     @Html.AntiForgeryToken()
     <div class="row">
         <div class="col-md-9">
-            <h2 class="text-center">@Resources.Resources.browse_collection "@Model.CollectionName" @Resources.Resources.users "@Model.CreatorName"</h2>
+            <h2 class="text-center">@Resources.Resources.browse_collection "@Model.CollectionName" @Resources.Resources.user "@Model.CreatorName"</h2>
             <h3 id="description">@Resources.Resources.collection_description:@Html.Raw(Markdig.Markdown.ToHtml(Model.CollectionDescription)) </h3>
             <hr class="horizontal-border" />
 

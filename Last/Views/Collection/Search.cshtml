@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_LayoutProfile.cshtml";
 }
 
-<h2>Search</h2>
+<h2>@Resources.Resources.search</h2>
 
 @foreach (var collection in Model)
 {
@@ -22,7 +22,7 @@
     })
 
 
-
+    
     @*CREATE PROCEDURE [dbo].[FullTextSearch]
     @text nvarchar(50) 
 AS

@@ -26,7 +26,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    @Html.ActionLink("Main", "Main", "Collection", new { area = "" }, new { @class = "nav-link" })
+                    @Html.ActionLink(Resources.Resources.main, "Main", "Collection", new { area = "" }, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
                     
@@ -42,13 +42,11 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
+                        @Resources.Resources.language
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href=@Url.Action("ChangeCulture", "Home",new { lang = "ru" })> Ru</a>
-                        <a class="dropdown-item" href=@Url.Action("ChangeCulture", "Home",new { lang = "en" })>En</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href=@Url.Action("ChangeCulture", "Home",new { lang = "ru" })>@Resources.Resources.russian</a>
+                        <a class="dropdown-item" href=@Url.Action("ChangeCulture", "Home",new { lang = "en" })>@Resources.Resources.english</a>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -58,8 +56,8 @@
 
             @using (@Html.BeginForm("Search", "Collection", FormMethod.Get, new { @class = "form-inline my-2 my-lg-0" }))
             {
-                <input class="form-control mr-sm-2" type="search" name="search" id="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <input class="form-control mr-sm-2" type="search" name="search" id="search" placeholder="@Resources.Resources.search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">@Resources.Resources.search</button>
             }
 
             @if (!User.Identity.IsAuthenticated)

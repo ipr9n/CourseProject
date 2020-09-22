@@ -270,4 +270,19 @@
   <data name="gender" xml:space="preserve">
     <value>Пол</value>
   </data>
+  <data name="english" xml:space="preserve">
+    <value>Английский</value>
+  </data>
+  <data name="language" xml:space="preserve">
+    <value>Язык</value>
+  </data>
+  <data name="main" xml:space="preserve">
+    <value>Главная</value>
+  </data>
+  <data name="russian" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="search" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
 </root>
