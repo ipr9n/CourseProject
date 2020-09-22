@@ -270,6 +270,9 @@
   <data name="gender" xml:space="preserve">
     <value>Пол</value>
   </data>
+  <data name="adminpanel" xml:space="preserve">
+    <value>Админ панель</value>
+  </data>
   <data name="english" xml:space="preserve">
     <value>Английский</value>
   </data>

@@ -25,7 +25,7 @@ namespace Last
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css",
+                      "~/Content/Site.css",
                       "~/Content/DataTables/css/dataTables.bootstrap4.min.css",
                       "~/Content/DataTables/css/buttons.dataTables.min.css"));
 

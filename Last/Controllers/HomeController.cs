@@ -123,7 +123,6 @@ namespace Last.Controllers
         public ActionResult ChangeCulture(string lang)
         {
             string returnUrl = Request.UrlReferrer.AbsolutePath;
-            List<string> cultures = new List<string>() { "ru", "en"};
 
             if (Request.Cookies["lang"] == null)
             {
@@ -131,14 +130,7 @@ namespace Last.Controllers
             }
             else
             {
-                if (Request.Cookies["lang"].Value == "en")
-                {
-                    Response.Cookies["lang"].Value = "ru";
-                }
-                else if (Request.Cookies["lang"].Value == "ru")
-                {
-                    Response.Cookies["lang"].Value = "en";
-                }
+                Response.Cookies["lang"].Value = (lang == "en" ? "en" : "ru");
             }
 
             return Redirect(returnUrl);

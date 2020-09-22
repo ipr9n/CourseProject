@@ -67,6 +67,10 @@
             }
             else
             {
+                if (User.IsInRole("admin"))
+                {
+        <div class="red-links"> @Html.ActionLink(Resources.Resources.adminpanel, "Adminpanel", "Home", null, new { @class = "nav-link" })</div>
+                }
                 <a class="nav_link">@User.Identity.Name</a>
                 @Html.ActionLink(Resources.Resources.logout, "Logout", "Account",null, new { @class = "nav-link" })
             }

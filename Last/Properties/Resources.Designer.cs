@@ -88,6 +88,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Админ панель.
+        /// </summary>
+        public static string adminpanel {
+            get {
+                return ResourceManager.GetString("adminpanel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Возраст.
         /// </summary>
         public static string age {
