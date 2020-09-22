@@ -123,25 +123,24 @@ namespace Last.Controllers
         public ActionResult ChangeCulture(string lang)
         {
             string returnUrl = Request.UrlReferrer.AbsolutePath;
-            // Список культур
-            List<string> cultures = new List<string>() { "ru", "en", "de" };
-            if (!cultures.Contains(lang))
+            List<string> cultures = new List<string>() { "ru", "en"};
+
+            if (Request.Cookies["lang"] == null)
             {
-                lang = "ru";
+                Response.Cookies["lang"].Value = "ru";
             }
-            // Сохраняем выбранную культуру в куки
-            HttpCookie cookie = Request.Cookies["lang"];
-            if (cookie != null)
-                cookie.Value = lang;   // если куки уже установлено, то обновляем значение
             else
             {
-
-                cookie = new HttpCookie("lang");
-                cookie.HttpOnly = false;
-                cookie.Value = lang;
-                cookie.Expires = DateTime.Now.AddYears(1);
+                if (Request.Cookies["lang"].Value == "en")
+                {
+                    Response.Cookies["lang"].Value = "ru";
+                }
+                else if (Request.Cookies["lang"].Value == "ru")
+                {
+                    Response.Cookies["lang"].Value = "en";
+                }
             }
-            Response.Cookies.Add(cookie);
+
             return Redirect(returnUrl);
         }
 
