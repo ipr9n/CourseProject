@@ -1,0 +1,161 @@
+﻿@model Last.Models.RegisterModel
+
+@{ ViewBag.Title = "Регистрация"; }
+
+<h2>Регистрация</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.SecondName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SecondName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.SecondName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Gender", new SelectList(new string[] {"Мужской","Женский"}), new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" id="createbtn" name="createbtn" value=@Resources.Resources.create class="btn btn-default" />
+        </div>
+    </div>
+    <input type="hidden" name="AvatarUrl" id="AvatarUrl" value="" />
+</div>}
+
+<div id="drop-area" class="form-group">
+    <form class="my-form">
+        <p>@Resources.Resources.dragndrop</p>
+        <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+        <label class="button" for="fileElem">@Resources.Resources.select_image</label>
+    </form>
+</div>
+
+
+
+<script>
+
+    let dropArea = document.getElementById('drop-area');
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+  dropArea.addEventListener(eventName, preventDefaults, false)
+    })
+
+function preventDefaults (e) {
+  e.preventDefault()
+  e.stopPropagation()
+    }
+
+    ;['dragenter', 'dragover'].forEach(eventName => {
+  dropArea.addEventListener(eventName, highlight, false)
+})
+;['dragleave', 'drop'].forEach(eventName => {
+  dropArea.addEventListener(eventName, unhighlight, false)
+})
+function highlight(e) {
+  dropArea.classList.add('highlight')
+}
+function unhighlight(e) {
+  dropArea.classList.remove('highlight')
+    }
+
+    dropArea.addEventListener('drop', handleDrop, false)
+function handleDrop(e) {
+  let dt = e.dataTransfer
+  let files = dt.files
+    handleFiles(files)
+
+    }
+
+    function handleFiles(files) {
+  ([...files]).forEach(uploadFile)
+}
+
+
+    const cloudName = 'ipr9n';
+    const unsignedUploadPreset = 'mp8fevzi';
+
+    function uploadFile(file) {
+        var url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
+        var xhr = new XMLHttpRequest();
+        var fd = new FormData();
+        xhr.open('POST', url, true);
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+        document.getElementById('createbtn').disabled = true;
+
+        xhr.onreadystatechange = function (e) {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+
+                var url = response.secure_url;
+                $("#AvatarUrl").val(url);
+                        document.getElementById('createbtn').disabled = false;
+            }
+        };
+        fd.append('upload_preset', unsignedUploadPreset);
+        fd.append('tags', 'browser_upload'); // Optional - add tag for image admin in Cloudinary
+        fd.append('file', file);
+        xhr.send(fd);
+
+    }
+
+</script>

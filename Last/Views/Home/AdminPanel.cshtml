@@ -1,0 +1,99 @@
+﻿@model List<LogicLayer.ViewModels.UserViewModel>
+
+@{
+    ViewBag.Title = "Main";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("UserDeleteForm", "Home"))
+{
+
+    <div class="container-fluid">
+        <div class="row" style="margin-top: 50px">
+            <div class="col">
+                <input type="submit"
+                       class="btn btn-danger"
+                       style="float: left"
+                       formaction="BlockForm"
+                       formmethod="post"
+                       value=@Resources.Resources.block />
+            </div>
+            <div class="col">
+                <input type="submit"
+                       class="btn btn-danger"
+                       style="float: left"
+                       formaction="UnBlockForm"
+                       formmethod="post"
+                       value=@Resources.Resources.unblock />
+            </div>
+            <div class="col">
+
+                <input type="submit"
+                       class="btn btn-danger"
+                       style="float: left"
+                       formaction="UserDeleteForm"
+                       formmethod="post"
+                       value=@Resources.Resources.delete />
+
+            </div>
+
+            <div class="col">
+
+                <input type="submit"
+                       class="btn btn-danger"
+                       style="float: left"
+                       formaction="AddAdminsForm"
+                       formmethod="post"
+                       value=@Resources.Resources.add_admin />
+
+            </div>
+
+            <div class="col">
+
+                <input type="submit"
+                       class="btn btn-danger"
+                       style="float: left"
+                       formaction="RemoveAdminsForm"
+                       formmethod="post"
+                       value=@Resources.Resources.remove_admin />
+
+            </div>
+        </div>
+    </div>
+
+
+    <table class="table table-striped table-bordered" id="dt-table">
+        <thead>
+            <tr>
+                <th scope="col"><input type="checkbox" onclick="javascript:check(this.form.checks,checked)" name="master_box"></th>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Age</th>
+                <th scope="col">Email</th>
+                <th scope="col">Status</th>
+                 <th scope="col">Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row"><input type="checkbox" name="checks" id="checks" value=@item.Id /></th>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Age</td>
+                    <td>@item.Email</td>
+                    <td>@item.Status</td>
+                    <td>@item.Role</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+    <script type="text/javascript">
+        function check(field, flag) {
+            if (flag == 1) { for (i = 0; i < field.length; i++) field[i].checked = true; }
+            else { for (i = 0; i < field.length; i++) field[i].checked = false; }
+        }
+    </script>

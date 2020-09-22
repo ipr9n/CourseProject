@@ -1,0 +1,13 @@
+﻿body {
+    background-color: black !important;
+    filter: invert(100) hue-rotate(180deg); /* hue-rotate возвращает тона обратно */
+}
+
+body img {
+    filter: invert(100) hue-rotate(180deg);
+}
+
+
+
+
+

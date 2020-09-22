@@ -1,0 +1,40 @@
+﻿@model List<LogicLayer.ViewModels.CollectionSearchViewModel>
+
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_LayoutProfile.cshtml";
+}
+
+<h2>Search</h2>
+
+@foreach (var collection in Model)
+{
+    <h3>@collection.CollectionName</h3>
+    @Html.Partial("SearchResultTable", collection.CollectionItems)
+    <br />
+}
+<script>
+    $(document).ready(function () {
+        $('table.table').DataTable({
+            responsive: true
+        })
+    })
+
+
+
+    @*CREATE PROCEDURE [dbo].[FullTextSearch]
+    @text nvarchar(50) 
+AS
+ SELECT 
+Items.Id
+FROM Items 
+	JOIN ItemCollections ON ItemCollections.Id = Items.ItemCollectionId
+	LEFT JOIN ItemComments ON Items.Id = ItemComments.ItemId
+
+WHERE  [Name] LIKE '%'+@text+'%' OR [Description] like '%'+@text+'%' or [CollectionDescription] like '%'+@text+'%' or [Text] like '%'+@text+'%' or [CollectionName] like '%'+@text+'%'
+GO*@
+
+
+</script>
+

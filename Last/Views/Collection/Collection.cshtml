@@ -1,0 +1,86 @@
+﻿@model LogicLayer.ViewModels.CollectionViewModel
+
+
+@{ ViewBag.Title = "Collection";
+    Layout = "~/Views/Shared/_LayoutProfile.cshtml"; }
+
+<div class="container-fluid div-group-infopanel">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-9">
+            <h2 class="text-center">@Resources.Resources.browse_collection "@Model.CollectionName" @Resources.Resources.users "@Model.CreatorName"</h2>
+            <h3 id="description">@Resources.Resources.collection_description:@Html.Raw(Markdig.Markdown.ToHtml(Model.CollectionDescription)) </h3>
+            <hr class="horizontal-border" />
+
+            @if (Model.CollectionItems.Count > 0)
+            {@Html.Partial("CollectionItems", Model.CollectionItems)}
+        </div>
+
+        <div class="col-md-3" style="margin-top: 20px;">
+            <div><img src="@Model.ImageUrl" style="border-radius: 50%; margin-bottom: 20px;max-width: 200px; max-height: 200px" /></div>
+            <h4>@Resources.Resources.collection_theme : @Model.CollectionType</h4>
+            @if (ViewBag.IsGroupAdmin || @User.IsInRole("admin"))
+            {
+
+                using (@Html.BeginForm("DeleteCollection", "Collection"))
+                {
+                    <input type="hidden" name="id" id="id" value=@Model.Id />
+                    <input type="submit" class="btn btn-default" value="@Resources.Resources.delete_collection" style="text-align: center; width: 100%; display: initial;" />
+                }
+
+                using (@Html.BeginForm("ChangeCollection", "Collection"))
+                {
+                    <input type="hidden" name="id" id="id" value=@Model.Id />
+                    <input type="submit" class="btn btn-default" value="@Resources.Resources.edit_collection" style="text-align: center; width: 100%; display: initial;" />
+                }
+
+                @Html.Partial("CreateItem", new LogicLayer.ViewModels.ItemViewModel()
+                   {
+                CustomFieldViewModels = Model.CustomFieldViewModels,
+                   GroupId = Model.Id
+                   })
+            }
+
+            <br />
+        </div>
+    </div>
+</div>
+<hr class="horizontal-border" />
+
+<script>
+
+    $(document).ready(function () {
+        // Setup - add a text input to each footer cell
+        $('#dt-table thead tr').clone(true).appendTo('#dt-table thead');
+        $('#dt-table thead tr:eq(1) th').each(function (i) {
+            var title = $(this).text();
+            $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+
+            $('input', this).on('keyup change', function () {
+                if (table.column(i).search() !== this.value) {
+                    table
+                        .column(i)
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
+        var table = $('#dt-table').DataTable({
+            scrollY: "300px",
+            scrollX: true,
+            scrollCollapse: true,
+            paging: false,
+            orderCellsTop: true,
+            fixedColumns: true,
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'csv',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+                }
+            ]
+        });
+    })
+</script>

@@ -1,0 +1,106 @@
+﻿@model LogicLayer.ViewModels.ItemViewModel
+
+@{
+    ViewBag.Title = "Item";
+    Layout = "~/Views/Shared/_LayoutProfile.cshtml";
+}
+
+
+<div>
+    <hr />
+    <div class="card w-100">
+        <div class="card-body">
+            <h5 class="card-title">  @Html.DisplayNameFor(model => model.Name)</h5>
+            <p class="card-text">
+                @Html.DisplayFor(model => model.Name)
+            </p>
+        </div>
+    </div>
+
+    <div class="card w-100">
+        <div class="card-body">
+            <h5 class="card-title">  @Html.DisplayNameFor(model => model.Description)</h5>
+            <p class="card-text">
+                @Html.DisplayFor(model => model.Description)
+            </p>
+        </div>
+    </div>
+    <div class="card w-100">
+        <div class="card-body">
+            <h5 class="card-title">  @Html.DisplayNameFor(model => model.Tags)</h5>
+            <p class="card-text">
+                @Html.DisplayFor(model => model.Tags)
+            </p>
+        </div>
+    </div>
+
+    @foreach (var addValue in Model.CustomFieldViewModels)
+    {
+        <div class="card w-100">
+            <div class="card-body">
+                <h5 class="card-title">@addValue.Name</h5>
+                <p class="card-text">
+                    @if (Model.CustomValues.FirstOrDefault(x => x.CustomFieldId == addValue.Id) != null)
+                    {
+                        if (addValue.Type != "Markdown")
+                        {
+                            @Model.CustomValues.FirstOrDefault(x => x.CustomFieldId == addValue.Id).Value
+                        }
+                        else
+                        {
+                            @Html.Raw(Markdig.Markdown.ToHtml(@Model.CustomValues.FirstOrDefault(x => x.CustomFieldId == addValue.Id).Value))
+                        }
+                    }
+                </p>
+            </div>
+        </div>
+    }
+</div>
+
+<hr class="horizontal-border" />
+<div class="wall">
+    @if (User.Identity.IsAuthenticated)
+    {
+        using (Html.BeginForm("AddComment", "Collection"))
+        {
+            <input type="hidden" value="@Model.Id" id="itemId" name="itemId" />
+            <input type="text" name="commentText" id="commentText" style="width: 100% !important; max-width: 100%; height:50px;"
+                   maxlength="250"
+                   placeholder="@Resources.Resources.write_comment" />
+            <input type="submit" value="@Resources.Resources.send" />
+        }
+    }
+    <h2>@Resources.Resources.comments</h2>
+    <hr class="horizontal-border" />
+
+    <div>
+        @Html.Partial("ShowComments", Model.Comments)
+    </div>
+    <div id="comment" name="comment">
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+<script src="~/signalr/hubs"></script>
+<script type="text/javascript">
+
+        $(document).ready(function () {
+
+            var commenthub = $.connection.commentHub;
+
+            commenthub.client.displayMessage = function (message, commentText, authorName) {
+                if (@Model.Id== message) {
+                     let div = document.createElement('div');
+  div.innerHTML = '   <div class="card"><div class="card-header">'+authorName+
+        '</div><div class="card-body"><blockquote class="blockquote mb-0">'+
+               '<p>'+commentText+'</p></blockquote></div></div>';
+                    var body = document.getElementById("comment");
+                    body.appendChild(div);
+
+                }
+            };
+
+         $.connection.hub.start();
+        });
+</script>

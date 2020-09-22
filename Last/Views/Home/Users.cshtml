@@ -1,0 +1,21 @@
+﻿@model IEnumerable<LogicLayer.ViewModels.UserViewModel>
+
+
+
+@foreach (var item in Model)
+{
+    <div class="card mb-3" style="max-width: 100%;">
+        <div class="row no-gutters">
+            <div class="col-md-2">
+                <img src="@item.AvatarUrl" class="card-img" alt="...">
+            </div>
+            <div class="col-md-9">
+                <div class="card-body">
+                    <h5 class="card-title"> @Html.ActionLink(item.Name, $"Index/{@item.Id}", "Home")</h5>
+                    <p class="card-text">@Html.DisplayNameFor(model => model.Age): @item.Age</p>
+                    <p class="card-text">@Html.DisplayNameFor(model => model.Gender): @item.Gender</p>
+                </div>
+            </div>
+        </div>
+    </div>
+}

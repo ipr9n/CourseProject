@@ -1,0 +1,246 @@
+﻿body {
+    margin: 0px;
+    color: rgb(20, 16, 16);
+    background-color: white;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    max-width: 1170px;
+    margin: 0 auto;
+}
+
+/* Header 
+================================*/
+
+.header .container {
+    /*background-color: rgb(239, 239, 250);*/
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.header_inner {
+    background-color: rgb(239, 239, 250);
+    padding: 5px 0;
+    border-bottom: 1px solid rgb(43, 11, 48);
+}
+
+h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: 40px;
+    color: rgb(60, 32, 97);
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    margin: 0px;
+}
+
+h5 {
+    font-size: 17px;
+    color: rgb(63, 21, 73);
+    text-transform: uppercase;
+    font-family: 'Tenali Ramakrishna', sans-serif;
+    display: flex;
+    justify-content: center;
+    margin: 0px;
+}
+
+.header_logo {
+    align-items: center;
+}
+
+.header_nav {
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 700;
+    border-bottom: 1px solid rgb(43, 11, 48);
+}
+
+.nav_link {
+    margin-left: 50px;
+    color: black;
+    text-transform: uppercase;
+    text-decoration: none;
+    opacity: 0.5;
+    transition: opacity .1s linear;
+}
+
+    .nav_link:hover {
+        opacity: 1;
+    }
+
+/* content 
+================================*/
+
+.content {
+    margin: 0;
+}
+
+    .content .container {
+        min-height: 255px;
+        border-bottom: 1px solid;
+    }
+
+.sidebar {
+    min-height: 255px;
+    width: 40%;
+    float: left;
+    display: flex;
+    justify-content: center;
+    border-right: 1px solid black;
+}
+
+
+.avatar_photo {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    vertical-align: top;
+    padding: 10px;
+    border-radius: 2px;
+    font-size: 10px;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: .1s linear;
+    background-color: grey;
+}
+
+    .btn:hover {
+        background-color: rgb(92, 90, 90);
+    }
+
+.profile {
+    min-height: 255px;
+    width: 60%;
+    float: left;
+    text-align: center;
+}
+
+.btn_1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.btn_cpi {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 2px;
+    font-size: 10px;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: .1s linear;
+    background-color: grey;
+}
+
+    .btn_cpi:hover {
+        opacity: 1;
+        background-color: rgb(92, 90, 90);
+    }
+
+.profile_inner {
+    font-family: 'Source Serif Pro', serif;
+}
+
+.hobies {
+    margin-bottom: 0px;
+}
+
+/* wall 
+================================*/
+
+.wall .container {
+    background-color: rgb(239, 239, 250);
+}
+
+.news {
+    display: flex;
+    padding: 20px;
+}
+
+.new_icon {
+    width: 50px;
+    height: 50px;
+}
+
+.new_item {
+    width: 20%;
+    text-align: center;
+}
+
+.new_topic {
+    margin: 5px 0;
+    font-family: 'Gidugu', sans-serif;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.new_text {
+    font-family: 'Comfortaa', cursive;
+}
+
+/* footer 
+================================*/
+
+.footer {
+    margin-top: 0px;
+}
+
+    .footer .container {
+        border-top: 1px solid rgb(15, 40, 41);
+        background-color: #3a3e64;
+    }
+
+.footer_inner {
+    display: flex;
+}
+
+.footer_block {
+    width: 50%;
+    text-align: center;
+}
+
+.copyright {
+    text-align: center;
+}
+
+.footer_title {
+    margin: 5px 0;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.social {
+    display: flex;
+    justify-content: center;
+}
+
+.social_item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    margin-right: 10px;
+    margin-top: 0px;
+}

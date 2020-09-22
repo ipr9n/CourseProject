@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    @if (Request.Cookies["theme"] != null && Request.Cookies["theme"].Value == "dark")
+    {
+        <link rel="stylesheet" href="~/Content/DarkTheme.css">
+    }
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Collection management site</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    @Html.ActionLink("Main", "Main", "Collection", new { area = "" }, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    
+                    @Html.ActionLink(Resources.Resources.profile, "Index/1", "Home", new { area = "" }, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink(Resources.Resources.users, "Users", "Home", new { area = "" }, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink(Resources.Resources.collections, "Collections", "Collection", new { area = "" }, new { @class = "nav-link" })
+                </li>
+
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href=@Url.Action("ChangeCulture", "Home",new { lang = "ru" })> Ru</a>
+                        <a class="dropdown-item" href=@Url.Action("ChangeCulture", "Home",new { lang = "en" })>En</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink(Resources.Resources.change_theme, "ChangeTheme", "Home", new { area = "" }, new { @class = "nav-link" })
+                </li>
+            </ul>
+
+            @using (@Html.BeginForm("Search", "Collection", FormMethod.Get, new { @class = "form-inline my-2 my-lg-0" }))
+            {
+                <input class="form-control mr-sm-2" type="search" name="search" id="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            }
+
+            @if (!User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink(Resources.Resources.login, "Login", "Account",null, new { @class = "nav-link" })
+                @Html.ActionLink(Resources.Resources.register, "Register", "Account",null, new { @class = "nav-link" })
+            }
+            else
+            {
+                <a class="nav_link">@User.Identity.Name</a>
+                @Html.ActionLink(Resources.Resources.logout, "Logout", "Account",null, new { @class = "nav-link" })
+            }
+
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @Scripts.Render("~/bundles/bootstrap")
+   @* @Scripts.Render("~/scripts/jquery-3.4.1.min.js")*@
+    @Scripts.Render("~/bundles/datatables")
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+
+</body>
+</html>
+

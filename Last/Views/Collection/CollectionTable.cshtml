@@ -1,0 +1,25 @@
+﻿@model IEnumerable<LogicLayer.ViewModels.CollectionViewModel>
+
+@foreach (var item in Model)
+{
+    <div class="card mb-3" style="max-width: 100%;">
+        <div class="row no-gutters">
+            <div class="col-md-2">
+                <img src="@item.ImageUrl" class="card-img" alt="...">
+            </div>
+            <div class="col-md-9">
+                <div class="card-body">
+                    <h5 class="card-title"> @Html.ActionLink(item.CollectionName, $"Collection/{@item.Id}", "Collection")</h5>
+                    <div style="max-height: 310px; overflow: hidden;"><p class="card-text" >@Html.Raw(Markdig.Markdown.ToHtml(@item.CollectionDescription))</p></div>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            @Resources.Resources.admin
+                        <br />
+                        @Html.ActionLink(item.CreatorName, $"Index/{@item.CollectionCreatorId}", "Home")
+                    </small>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+}

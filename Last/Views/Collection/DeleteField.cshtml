@@ -1,0 +1,18 @@
+﻿@model List<LogicLayer.ViewModels.CustomFieldViewModel>
+
+<div>
+    @using (Html.BeginForm("DeleteField", "Collection", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <select id="fieldId" class="form-control" name="fieldId">
+            @foreach (var item in Model)
+            {
+                <option value=@item.Id>@item.Name</option>
+            }
+        </select>
+        <div class="form-actions no-color">
+            <input type="submit" value="@Resources.Resources.delete" class="btn btn-default" /> |
+        </div>
+    }
+</div>

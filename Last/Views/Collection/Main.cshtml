@@ -1,0 +1,85 @@
+﻿@model LogicLayer.ViewModels.MainPageViewModel
+
+@{
+    ViewBag.Title = "Main";
+    Layout = "~/Views/Shared/_LayoutProfile.cshtml";
+}
+
+<h2>@Resources.Resources.biggest_collections</h2>
+<div class="container-fluid">
+    <div class="row">
+        @if (Model.MaxItemCollections.Count > 0)
+        {
+            foreach (var collection in Model.MaxItemCollections)
+            {
+                <div class="col-sm-6">
+                    <div class="card mb-3" style="max-width: 540px; min-height: 340px">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="@collection.ImageUrl" class="card-img" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">@collection.CollectionName</h5>
+                                    <div style="max-height: 180px; min-height: 180px; overflow: hidden;"><p class="card-text">@Html.Raw(Markdig.Markdown.ToHtml(@collection.CollectionDescription))</p></div>
+                                    <hr />
+                                    <a href="@Url.Action($"Collection/{collection.Id}", "Collection")" class="btn btn-primary">@Resources.Resources.goto_collection</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            }
+        }
+    </div>
+</div>
+<hr class="horizontal-border" />
+<div id="tagresults">
+
+</div>
+<h3>@Resources.Resources.tags</h3>
+<div class="container-fluid">
+    <div class="row">
+        @foreach (var collection in Model.Tags)
+        {
+            <div class="col-md-2 ">
+                @using (Ajax.BeginForm("GetItemsByTag", new AjaxOptions { UpdateTargetId = "tagresults" }))
+                {
+                    <input type="hidden" value="@collection.Id" name="Id" id="Id" />
+                    <input type="submit" class="btn btn-info" value="@collection.Name" style="min-width: 100%;" />
+                }
+
+            </div>
+        }
+    </div>
+</div>
+<hr class="horizontal-border" />
+@if (Model.LastItems.Count > 0)
+{
+    @Html.Partial("SearchResultTable", @Model.LastItems)
+}
+
+<script>
+
+    $(document).ready(function () {
+        var table = $('#dt-table').DataTable({
+            scrollY: "300px",
+            scrollX: true,
+            scrollCollapse: true,
+            paging: false,
+            orderCellsTop: true,
+            fixedColumns: true,
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'csv',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+                }
+            ]
+        });
+
+    })
+</script>

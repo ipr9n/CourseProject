@@ -1,0 +1,144 @@
+﻿@using LogicLayer.Enums
+@model LogicLayer.ViewModels.CollectionViewModel
+
+@{
+    ViewBag.Title = "ChangeCollection";
+    Layout = "~/Views/Shared/_LayoutProfile.cshtml";
+}
+<img src="@Model.ImageUrl" id="preview" name="preview" style="border-radius: 50%; margin-bottom: 20px;max-width: 200px; max-height: 200px" />
+<hr />
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            @using (Html.BeginForm("ChangeCollectionSettings", "Collection"))
+            {
+
+                <div class="form-horizontal">
+                    @Html.HiddenFor(model => model.ImageUrl)
+                    @Html.HiddenFor(model => model.Id)
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CollectionName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CollectionName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CollectionName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CollectionDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <textarea class="form-control" id="CollectionDescription" name="CollectionDescription" rows="3">@Model.CollectionDescription</textarea>
+                            @Html.ValidationMessageFor(model => model.CollectionDescription, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CollectionType, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(m => m.CollectionType,
+                                new SelectList(Enum.GetValues(typeof(CollectionTypes))))
+                            @Html.ValidationMessageFor(model => model.CollectionType, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="@Resources.Resources.save" id="createbtn" name="createbtn" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+            <div id="drop-area" class="form-group">
+                <form class="my-form">
+                    <p>@Resources.Resources.dragndrop</p>
+                    <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+                    <label class="button" for="fileElem">@Resources.Resources.select_image</label>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6">
+
+            <span style="color: red">Добавить новые поля</span>
+            @Html.Partial("CreateField", new LogicLayer.ViewModels.CreateFieldViewModel() { CollectionId = Model.Id })
+            <span style="color: red">Удалить существующие поля</span>
+            @Html.Partial("DeleteField", Model.CustomFieldViewModels)
+            <span style="color: red">Редактировать название</span>
+            @Html.Partial("EditCustomFieldName", Model.CustomFieldViewModels)
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+    let dropArea = document.getElementById('drop-area');
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false)
+    })
+
+    function preventDefaults(e) {
+        e.preventDefault()
+        e.stopPropagation()
+    }
+
+    ;['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, highlight, false)
+    })
+        ;['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, unhighlight, false)
+        })
+    function highlight(e) {
+        dropArea.classList.add('highlight')
+    }
+    function unhighlight(e) {
+        dropArea.classList.remove('highlight')
+    }
+
+    dropArea.addEventListener('drop', handleDrop, false)
+    function handleDrop(e) {
+        let dt = e.dataTransfer
+        let files = dt.files
+        handleFiles(files)
+
+    }
+
+    function handleFiles(files) {
+        ([...files]).forEach(uploadFile)
+    }
+
+
+    const cloudName = 'ipr9n';
+    const unsignedUploadPreset = 'mp8fevzi';
+
+    function uploadFile(file) {
+        var url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
+        var xhr = new XMLHttpRequest();
+        var fd = new FormData();
+        xhr.open('POST', url, true);
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+        document.getElementById('createbtn').disabled = true;
+
+        xhr.onreadystatechange = function (e) {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+
+                var url = response.secure_url;
+                $("#ImageUrl").val(url);
+                document.getElementById('createbtn').disabled = false;
+                $("#preview").attr("src", url);
+            }
+        };
+        fd.append('upload_preset', unsignedUploadPreset);
+        fd.append('tags', 'browser_upload'); // Optional - add tag for image admin in Cloudinary
+        fd.append('file', file);
+        xhr.send(fd);
+
+    }
+
+</script>
