@@ -153,6 +153,9 @@
   <data name="name" xml:space="preserve">
     <value>Имя</value>
   </data>
+  <data name="required" xml:space="preserve">
+    <value>Заполните поле</value>
+  </data>
   <data name="string1" xml:space="preserve">
     <value>Дополнительное текстовое поле</value>
   </data>

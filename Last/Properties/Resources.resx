@@ -288,4 +288,7 @@
   <data name="search" xml:space="preserve">
     <value>Поиск</value>
   </data>
+  <data name="create-user-collection" xml:space="preserve">
+    <value>Создать коллекцию от имени пользователя</value>
+  </data>
 </root>

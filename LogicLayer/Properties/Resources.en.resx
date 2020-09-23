@@ -153,6 +153,9 @@
   <data name="name" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="required" xml:space="preserve">
+    <value>Required field</value>
+  </data>
   <data name="string1" xml:space="preserve">
     <value>Additional text box</value>
   </data>

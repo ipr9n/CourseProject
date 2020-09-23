@@ -171,6 +171,9 @@
   <data name="create-collection" xml:space="preserve">
     <value>Create collection</value>
   </data>
+  <data name="create-user-collection" xml:space="preserve">
+    <value>Create user collection</value>
+  </data>
   <data name="creator" xml:space="preserve">
     <value>Creator</value>
   </data>

@@ -223,6 +223,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Создать коллекцию от имени пользователя.
+        /// </summary>
+        public static string create_user_collection {
+            get {
+                return ResourceManager.GetString("create-user-collection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Создатель.
         /// </summary>
         public static string creator {

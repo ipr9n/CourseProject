@@ -1,21 +1,25 @@
 ﻿@model List<LogicLayer.ViewModels.CustomFieldViewModel>
 
-    <div>
-        @using (Ajax.BeginForm("EditFieldView", new AjaxOptions { UpdateTargetId = "fieldresult" }))
-        {
-            @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    @using (Ajax.BeginForm("EditFieldView", new AjaxOptions { UpdateTargetId = "fieldresult" }))
+    {
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.AntiForgeryToken()
 
-            <select id="fieldId" class="form-control" name="fieldId">
-                @foreach (var item in Model)
-                {
-                    <option value=@item.Id>@item.Name</option>
-                }
-            </select>
-            <div class="form-actions no-color">
-                <input type="submit" value="@Resources.Resources.edit" class="btn btn-default" /> |
+                <select id="fieldId" class="form-control" name="fieldId">
+                    @foreach (var item in Model)
+                    {
+                        <option value=@item.Id>@item.Name</option>
+                    }
+                </select>
             </div>
-        }
-    </div>
+        </div>
+        <div class="col-md-10">
+            <input type="submit" value="@Resources.Resources.edit" class="btn btn-warning" />
+        </div>
+    }
+</div>
 <div id="fieldresult">
 
 </div>
