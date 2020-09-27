@@ -50,8 +50,15 @@ namespace Last.Controllers
         [HttpPost]
         public ActionResult CreateField(CreateFieldViewModel model)
         {
-            CollectionService.AddField(model);
-            return RedirectToAction($"Collection/{model.CollectionId}");
+            if (ModelState.IsValid)
+            {
+                CollectionService.AddField(model);
+                return RedirectToAction($"Collection/{model.CollectionId}");
+            }
+            else
+            {
+                return View(model);
+            }
         }
 
         [HttpPost]
@@ -129,7 +136,11 @@ namespace Last.Controllers
         [HttpPost]
         public ActionResult UpdateField(CustomFieldViewModel model)
         {
-            CollectionService.UpdateField(model);
+            if (ModelState.IsValid)
+            {
+                CollectionService.UpdateField(model);
+            }
+
             return RedirectToAction($"Collection/{model.CollectionId}");
         }
 

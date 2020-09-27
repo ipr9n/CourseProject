@@ -28,7 +28,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CollectionDescription, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <textarea class="form-control" id="CollectionDescription" name="CollectionDescription" rows="3"></textarea>
+                <textarea class="form-control" id="CollectionDescription" placeholder="@Resources.Resources.markdown_text" name="CollectionDescription" rows="3"></textarea>
                 @Html.ValidationMessageFor(model => model.CollectionDescription, "", new { @class = "text-danger" })
             </div>
         </div>

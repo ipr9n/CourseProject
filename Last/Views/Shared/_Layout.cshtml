@@ -15,6 +15,15 @@
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-178823199-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-178823199-1');
+    </script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -29,7 +38,7 @@
                     @Html.ActionLink(Resources.Resources.main, "Main", "Collection", new { area = "" }, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
-                    
+
                     @Html.ActionLink(Resources.Resources.profile, "Index/1", "Home", new { area = "" }, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
@@ -62,17 +71,17 @@
 
             @if (!User.Identity.IsAuthenticated)
             {
-                @Html.ActionLink(Resources.Resources.login, "Login", "Account",null, new { @class = "nav-link" })
-                @Html.ActionLink(Resources.Resources.register, "Register", "Account",null, new { @class = "nav-link" })
+                @Html.ActionLink(Resources.Resources.login, "Login", "Account", null, new { @class = "nav-link" })
+                @Html.ActionLink(Resources.Resources.register, "Register", "Account", null, new { @class = "nav-link" })
             }
             else
             {
                 if (User.IsInRole("admin"))
                 {
-        <div class="red-links"> @Html.ActionLink(Resources.Resources.adminpanel, "Adminpanel", "Home", null, new { @class = "nav-link" })</div>
+                    <div class="red-links"> @Html.ActionLink(Resources.Resources.adminpanel, "Adminpanel", "Home", null, new { @class = "nav-link" })</div>
                 }
                 <a class="nav_link">@User.Identity.Name</a>
-                @Html.ActionLink(Resources.Resources.logout, "Logout", "Account",null, new { @class = "nav-link" })
+                @Html.ActionLink(Resources.Resources.logout, "Logout", "Account", null, new { @class = "nav-link" })
             }
 
         </div>
@@ -84,7 +93,7 @@
 
     @*@Scripts.Render("~/bundles/jquery")*@
     @Scripts.Render("~/bundles/bootstrap")
-   @* @Scripts.Render("~/scripts/jquery-3.4.1.min.js")*@
+    @* @Scripts.Render("~/scripts/jquery-3.4.1.min.js")*@
     @Scripts.Render("~/bundles/datatables")
     @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
 

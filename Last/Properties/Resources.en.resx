@@ -120,6 +120,9 @@
   <data name="add-admin" xml:space="preserve">
     <value>Make admin</value>
   </data>
+  <data name="add-fields" xml:space="preserve">
+    <value>Add new field</value>
+  </data>
   <data name="add-tag" xml:space="preserve">
     <value>Add tag</value>
   </data>
@@ -162,6 +165,9 @@
   <data name="collections" xml:space="preserve">
     <value>Collections</value>
   </data>
+  <data name="collections-none" xml:space="preserve">
+    <value>Collections not found</value>
+  </data>
   <data name="comments" xml:space="preserve">
     <value>Comments</value>
   </data>
@@ -176,6 +182,9 @@
   </data>
   <data name="creator" xml:space="preserve">
     <value>Creator</value>
+  </data>
+  <data name="date" xml:space="preserve">
+    <value>Datetime</value>
   </data>
   <data name="delete" xml:space="preserve">
     <value>Delete</value>
@@ -192,6 +201,9 @@
   <data name="edit-collection" xml:space="preserve">
     <value>Edit collection</value>
   </data>
+  <data name="edit-field-name" xml:space="preserve">
+    <value>Edit field name</value>
+  </data>
   <data name="email" xml:space="preserve">
     <value>Email</value>
   </data>
@@ -200,6 +212,9 @@
   </data>
   <data name="enter" xml:space="preserve">
     <value>Enter</value>
+  </data>
+  <data name="fields-none" xml:space="preserve">
+    <value>Custom fields not found</value>
   </data>
   <data name="firstName" xml:space="preserve">
     <value>Name</value>
@@ -210,8 +225,20 @@
   <data name="goto-collection" xml:space="preserve">
     <value>Enter collection</value>
   </data>
+  <data name="int" xml:space="preserve">
+    <value>Numeric</value>
+  </data>
+  <data name="item-search" xml:space="preserve">
+    <value>Items found in collection</value>
+  </data>
+  <data name="items-none" xml:space="preserve">
+    <value>Items not found</value>
+  </data>
   <data name="language" xml:space="preserve">
     <value>Language</value>
+  </data>
+  <data name="last-items" xml:space="preserve">
+    <value>Last added items</value>
   </data>
   <data name="likes" xml:space="preserve">
     <value>Likes</value>
@@ -224,6 +251,12 @@
   </data>
   <data name="main" xml:space="preserve">
     <value>Main</value>
+  </data>
+  <data name="markdown" xml:space="preserve">
+    <value>Markdown text</value>
+  </data>
+  <data name="markdown-text" xml:space="preserve">
+    <value>Markdown formatted text</value>
   </data>
   <data name="my-collections" xml:space="preserve">
     <value>My collections</value>
@@ -242,6 +275,9 @@
   </data>
   <data name="remove-admin" xml:space="preserve">
     <value>Remove admin</value>
+  </data>
+  <data name="remove-fields" xml:space="preserve">
+    <value>Remove field</value>
   </data>
   <data name="repeatPassword" xml:space="preserve">
     <value>Repeat password</value>
@@ -263,6 +299,12 @@
   </data>
   <data name="send" xml:space="preserve">
     <value>Send</value>
+  </data>
+  <data name="string" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="tagg-info" xml:space="preserve">
+    <value>Enter your tag in the field below</value>
   </data>
   <data name="tags" xml:space="preserve">
     <value>Tags</value>

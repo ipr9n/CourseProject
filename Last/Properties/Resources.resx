@@ -291,4 +291,46 @@
   <data name="create-user-collection" xml:space="preserve">
     <value>Создать коллекцию от имени пользователя</value>
   </data>
+  <data name="add-field" xml:space="preserve">
+    <value>Добавить новое поле</value>
+  </data>
+  <data name="collections-none" xml:space="preserve">
+    <value>Коллекций не найдено</value>
+  </data>
+  <data name="date" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="edit-field-name" xml:space="preserve">
+    <value>Редактировать название поля</value>
+  </data>
+  <data name="fields-none" xml:space="preserve">
+    <value>Дополнительный полей не найдено</value>
+  </data>
+  <data name="int" xml:space="preserve">
+    <value>Числовое</value>
+  </data>
+  <data name="item-search" xml:space="preserve">
+    <value>Айтемы найдены в коллекции</value>
+  </data>
+  <data name="items-none" xml:space="preserve">
+    <value>Айтемов не найдено</value>
+  </data>
+  <data name="last-items" xml:space="preserve">
+    <value>Последние айтемы</value>
+  </data>
+  <data name="markdown" xml:space="preserve">
+    <value>Текст с форматированием</value>
+  </data>
+  <data name="markdown-text" xml:space="preserve">
+    <value>Текст с поддержкой форматирования markdown</value>
+  </data>
+  <data name="remove-field" xml:space="preserve">
+    <value>Удалить поле</value>
+  </data>
+  <data name="string" xml:space="preserve">
+    <value>Текстовое</value>
+  </data>
+  <data name="tagg-info" xml:space="preserve">
+    <value>Введите тэг в поле ниже</value>
+  </data>
 </root>

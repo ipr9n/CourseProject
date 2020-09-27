@@ -18,11 +18,10 @@
             @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <select id="type" class="form-control" name="type">
-                    <option value="String">String</option>
-                    <option>Int</option>
-                    <option>Markdown</option>
-                    <option>Date</option>
-                    <option>Bool</option>
+                    <option value="String">@Resources.Resources._string</option>
+                    <option value="Int">@Resources.Resources._int</option>
+                    <option value="Markdown">@Resources.Resources.markdown</option>
+                    <option value="Date">@Resources.Resources.date</option>
                 </select>
 
                 @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })

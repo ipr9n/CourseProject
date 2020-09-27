@@ -8,11 +8,18 @@
 
 <h2>@Resources.Resources.search</h2>
 
-@foreach (var collection in Model)
+@if (Model.Count > 0)
 {
-    <h3>@collection.CollectionName</h3>
-    @Html.Partial("SearchResultTable", collection.CollectionItems)
-    <br />
+    foreach (var collection in Model)
+    {
+        <h3>@Resources.Resources.item_search: @collection.CollectionName</h3>
+        @Html.Partial("SearchResultTable", collection.CollectionItems)
+        <br />
+    }
+}
+else
+{
+    @Resources.Resources.items_none
 }
 <script>
     $(document).ready(function () {
@@ -22,13 +29,13 @@
     })
 
 
-    
+
     @*CREATE PROCEDURE [dbo].[FullTextSearch]
-    @text nvarchar(50) 
+    @text nvarchar(50)
 AS
- SELECT 
+ SELECT
 Items.Id
-FROM Items 
+FROM Items
 	JOIN ItemCollections ON ItemCollections.Id = Items.ItemCollectionId
 	LEFT JOIN ItemComments ON Items.Id = ItemComments.ItemId
 

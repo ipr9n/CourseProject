@@ -32,6 +32,10 @@
                 </div>
             }
         }
+        else
+        {
+            <h3>@Resources.Resources.collections_none</h3>
+        }
     </div>
 </div>
 <hr class="horizontal-border" />
@@ -55,9 +59,14 @@
     </div>
 </div>
 <hr class="horizontal-border" />
+<h2>@Resources.Resources.last_items</h2>
 @if (Model.LastItems.Count > 0)
 {
     @Html.Partial("SearchResultTable", @Model.LastItems)
+}
+else
+{
+    <h3>@Resources.Resources.items_none</h3>
 }
 
 <script>

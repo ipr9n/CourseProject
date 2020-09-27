@@ -61,11 +61,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Числовое.
+        /// </summary>
+        public static string _int {
+            get {
+                return ResourceManager.GetString("int", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Текстовое.
+        /// </summary>
+        public static string _string {
+            get {
+                return ResourceManager.GetString("string", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Выдать админку.
         /// </summary>
         public static string add_admin {
             get {
                 return ResourceManager.GetString("add-admin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавить новое поле.
+        /// </summary>
+        public static string add_field {
+            get {
+                return ResourceManager.GetString("add-field", resourceCulture);
             }
         }
         
@@ -196,6 +223,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Коллекций не найдено.
+        /// </summary>
+        public static string collections_none {
+            get {
+                return ResourceManager.GetString("collections-none", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Комментарии.
         /// </summary>
         public static string comments {
@@ -237,6 +273,15 @@ namespace Resources {
         public static string creator {
             get {
                 return ResourceManager.GetString("creator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Дата.
+        /// </summary>
+        public static string date {
+            get {
+                return ResourceManager.GetString("date", resourceCulture);
             }
         }
         
@@ -286,6 +331,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Редактировать название поля.
+        /// </summary>
+        public static string edit_field_name {
+            get {
+                return ResourceManager.GetString("edit-field-name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Эл. почта.
         /// </summary>
         public static string email {
@@ -309,6 +363,15 @@ namespace Resources {
         public static string enter {
             get {
                 return ResourceManager.GetString("enter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Дополнительный полей не найдено.
+        /// </summary>
+        public static string fields_none {
+            get {
+                return ResourceManager.GetString("fields-none", resourceCulture);
             }
         }
         
@@ -340,11 +403,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Айтемы найдены в коллекции.
+        /// </summary>
+        public static string item_search {
+            get {
+                return ResourceManager.GetString("item-search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Айтемов не найдено.
+        /// </summary>
+        public static string items_none {
+            get {
+                return ResourceManager.GetString("items-none", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Язык.
         /// </summary>
         public static string language {
             get {
                 return ResourceManager.GetString("language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Последние айтемы.
+        /// </summary>
+        public static string last_items {
+            get {
+                return ResourceManager.GetString("last-items", resourceCulture);
             }
         }
         
@@ -381,6 +471,24 @@ namespace Resources {
         public static string main {
             get {
                 return ResourceManager.GetString("main", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Текст с форматированием.
+        /// </summary>
+        public static string markdown {
+            get {
+                return ResourceManager.GetString("markdown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Текст с поддержкой форматирования markdown.
+        /// </summary>
+        public static string markdown_text {
+            get {
+                return ResourceManager.GetString("markdown-text", resourceCulture);
             }
         }
         
@@ -435,6 +543,15 @@ namespace Resources {
         public static string remove_admin {
             get {
                 return ResourceManager.GetString("remove-admin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Удалить поле.
+        /// </summary>
+        public static string remove_field {
+            get {
+                return ResourceManager.GetString("remove-field", resourceCulture);
             }
         }
         
@@ -507,6 +624,15 @@ namespace Resources {
         public static string String1 {
             get {
                 return ResourceManager.GetString("String1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Введите тэг в поле ниже.
+        /// </summary>
+        public static string tagg_info {
+            get {
+                return ResourceManager.GetString("tagg-info", resourceCulture);
             }
         }
         

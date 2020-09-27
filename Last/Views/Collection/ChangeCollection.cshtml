@@ -63,11 +63,11 @@
         </div>
         <div class="col-md-6">
 
-            <span style="color: red">Добавить новые поля</span>
+            <span style="color: red">@Resources.Resources.add_field</span>
             @Html.Partial("CreateField", new LogicLayer.ViewModels.CreateFieldViewModel() { CollectionId = Model.Id })
-            <span style="color: red">Удалить существующие поля</span>
+            <span style="color: red">@Resources.Resources.remove_field</span>
             @Html.Partial("DeleteField", Model.CustomFieldViewModels)
-            <span style="color: red">Редактировать название</span>
+            <span style="color: red">@Resources.Resources.edit_field_name</span>
             @Html.Partial("EditCustomFieldName", Model.CustomFieldViewModels)
 
         </div>

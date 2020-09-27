@@ -1,21 +1,34 @@
 ﻿@model List<LogicLayer.ViewModels.CustomFieldViewModel>
 
 <div class="form-horizontal">
-    @using (Html.BeginForm("DeleteField", "Collection", FormMethod.Post))
+    @if (Model.Count > 0)
     {
-        @Html.AntiForgeryToken()
+        using (Html.BeginForm("DeleteField", "Collection", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <div class="col-md-10">
+
+                    <select id="fieldId" class="form-control" name="fieldId">
+                        @foreach (var item in Model)
+                        {
+                            <option value=@item.Id>@item.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <input type="submit" value="@Resources.Resources.delete" class="btn btn-warning" />
+            </div>
+        }
+    }
+    else
+    {
         <div class="form-group">
             <div class="col-md-10">
-                <select id="fieldId" class="form-control" name="fieldId">
-                    @foreach (var item in Model)
-                    {
-                        <option value=@item.Id>@item.Name</option>
-                    }
-                </select>
+                @Resources.Resources.fields_none
             </div>
-        </div>
-        <div class="col-md-10">
-            <input type="submit" value="@Resources.Resources.delete" class="btn btn-warning" />
+
         </div>
     }
 </div>
