@@ -4,6 +4,8 @@ using DataAcess.Interfaces;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Threading.Tasks;
+using DataAccess.Interfaces;
+using DataAccess.Repositories;
 using DataAcess.Identity;
 
 namespace DataAcess.Repositories
@@ -14,6 +16,7 @@ namespace DataAcess.Repositories
 
         private ApplicationUserManager userManager;
         private UserProfileRepository userProfileRepository;
+        private IGameRepository gameRepository;
         private CollectionRepository collectionRepository;
         private ApplicationRoleManager roleManager;
         private IClientManager clientManager;
@@ -22,10 +25,16 @@ namespace DataAcess.Repositories
         {
             db = new ApplicationContext(connectionString);
             userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(db));
+            gameRepository = new GameRepository(db);
             roleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(db));
             collectionRepository = new CollectionRepository(db);
             userProfileRepository = new UserProfileRepository(db);
             clientManager = new ClientManager(db);
+        }
+
+        public IGameRepository GameRepository
+        {
+            get { return gameRepository; }
         }
 
         public ApplicationUserManager UserManager

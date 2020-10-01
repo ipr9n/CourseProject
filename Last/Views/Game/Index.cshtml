@@ -1,0 +1,74 @@
+﻿@model LogicLayer.ViewModels.GameIndexViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>@ViewBag.ErrorMessage</h2>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("CreateGame", "Game", FormMethod.Get))
+            {
+                <input type="submit" class="btn btn-secondary btn-lg btn-block" style="min-width: 100%" value="Создать игру" />
+            }
+        </div>
+        <div class="col-md-12">
+            <h2>Поиск по тэгам</h2>
+        </div>
+        @foreach (var tag in Model.Tags)
+        {
+            <div class="col-md-2" style="margin-top: 10px;">
+                @using (Ajax.BeginForm("GetGamesByTag", new AjaxOptions { UpdateTargetId = "tagresults" }))
+                {
+                    <input type="hidden" value="@tag.Id" name="Id" id="Id" />
+                    <input type="submit" class="btn btn-info" value="@tag.Name" style="min-width: 100%;" />
+                }
+
+            </div>
+        }
+
+        <hr/>
+        <div id="tagresults">
+
+        </div>
+        
+        <hr/>
+        <div class="col-md-12">
+        <h2>Все игры</h2>
+        </div>
+        @if (Model.Games.Count > 0)
+        {
+            foreach (var game in Model.Games)
+            {
+
+                <div class="col-md-4">
+                    @using (Html.BeginForm("Game", "Game", FormMethod.Post))
+                    {
+                        <input type="hidden" value="@game.Id" name="Id" id="Id" />
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title"> @game.Title</h5>
+                                <p class="card-text">Тэги: @game.Tags</p>
+                                @if (game.PlayersCount > 1)
+                                {
+                                    <input type="submit" class="btn btn-primary" value="enter" disabled />
+                                }
+                                else
+                                {
+                                    <input type="submit" class="btn btn-primary" value="enter" readonly />
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        }
+        else
+        {
+            <h3>Игр нет</h3>
+        }
+    </div>
+</div>
+

@@ -19,6 +19,10 @@ namespace LogicLayer.Services
             return new CollectionService(new IdentityUnitOfWork(connection));
         }
 
+        public IGameService CreateGameService()
+        {
+            return new GameService(new IdentityUnitOfWork(connection));
+        }
   
     }
 }

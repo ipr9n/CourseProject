@@ -19,7 +19,7 @@ namespace LogicLayer.Services
     {
         IUnitOfWork Database { get; set; }
 
-        Mapper test = new Mapper(MapperConfigs.CollectionToCollectionView);
+        Mapper _mapper = new Mapper(MapperConfigs.MapperConfiguration);
 
         public CollectionService(IUnitOfWork uow)
         {
@@ -74,7 +74,7 @@ namespace LogicLayer.Services
         {
             var collection = Database.CollectionRepository.GetAll().FirstOrDefault(x => x.Id == id);
 
-            return (test.Map<CollectionViewModel>(collection));
+            return (_mapper.Map<CollectionViewModel>(collection));
         }
 
         private bool IsTagExist(string tag)
@@ -113,7 +113,7 @@ namespace LogicLayer.Services
 
             Database.CollectionRepository.GetAll().FirstOrDefault(x => x.Id == model.GroupId).Items.Add(new Item()
             {
-                CustomValue = test.Map<List<CustomValue>>(model.CustomValues),
+                CustomValue = _mapper.Map<List<CustomValue>>(model.CustomValues),
                 Tags = GetTagsFromDb(model.Tags.Split()),
                 Name = model.Name,
                 Description = model.Description
@@ -125,7 +125,7 @@ namespace LogicLayer.Services
         {
             var item = Database.CollectionRepository.GetItems().FirstOrDefault(x => x.Id == id);
 
-            return test.Map<ItemViewModel>(item);
+            return _mapper.Map<ItemViewModel>(item);
         }
 
         public List<string> GetTagStringList()
@@ -164,7 +164,7 @@ namespace LogicLayer.Services
             {
                 Name = item.Name,
                 Id = item.Id,
-                CustomValue = test.Map<List<CustomValue>>(item.CustomValues),
+                CustomValue = _mapper.Map<List<CustomValue>>(item.CustomValues),
                 ItemCollectionId = item.GroupId,
                 Description = item.Description
             });
@@ -200,7 +200,7 @@ namespace LogicLayer.Services
                 var collection = Database.CollectionRepository.GetCollectionById(collectionId);
                 viewModelList.Add(new CollectionSearchViewModel()
                 {
-                    CollectionItems = test.Map<List<ItemViewModel>>(outputList.Where(x=>x.ItemCollectionId==collectionId).ToList()),
+                    CollectionItems = _mapper.Map<List<ItemViewModel>>(outputList.Where(x=>x.ItemCollectionId==collectionId).ToList()),
                     CollectionName = collection.CollectionName,
                  
                 });
@@ -210,21 +210,21 @@ namespace LogicLayer.Services
 
         public List<ItemViewModel> GetLastItems()
         {
-            var outputList = test.Map<List<ItemViewModel>>(Database.CollectionRepository.GetItems());
+            var outputList = _mapper.Map<List<ItemViewModel>>(Database.CollectionRepository.GetItems());
             outputList.Reverse();
 
             return outputList;
         }
 
         public List<CollectionViewModel> GetMaxItemCollections(int count)
-           => test.Map<List<CollectionViewModel>>(Database.CollectionRepository.GetMaxItemCollections(count));
+           => _mapper.Map<List<CollectionViewModel>>(Database.CollectionRepository.GetMaxItemCollections(count));
 
         public List<ItemViewModel> GetItemsByTag(int tagId)
-           => test.Map<List<ItemViewModel>>(Database.CollectionRepository.GetItemsByTag(tagId));
+           => _mapper.Map<List<ItemViewModel>>(Database.CollectionRepository.GetItemsByTag(tagId));
  
 
         public List<TagViewModel> GetAllTags()
-         => test.Map<List<TagViewModel>>(Database.CollectionRepository.GetTags());
+         => _mapper.Map<List<TagViewModel>>(Database.CollectionRepository.GetTags());
 
         public void ChangeCollectionSettings(CollectionViewModel model)
         {
@@ -238,7 +238,7 @@ namespace LogicLayer.Services
 
         public void AddField(CreateFieldViewModel model)
         {
-            Database.CollectionRepository.GetCollectionById(model.CollectionId).CustomFields.Add(test.Map<CustomField>(model));
+            Database.CollectionRepository.GetCollectionById(model.CollectionId).CustomFields.Add(_mapper.Map<CustomField>(model));
             Database.CollectionRepository.SaveChanges();
          
         }
@@ -251,7 +251,7 @@ namespace LogicLayer.Services
         }
 
         public CustomFieldViewModel GetFieldById(int fieldId)
-            => test.Map<CustomFieldViewModel>(Database.CollectionRepository.GetFieldById(fieldId));
+            => _mapper.Map<CustomFieldViewModel>(Database.CollectionRepository.GetFieldById(fieldId));
 
         public void DeleteField(int fieldId)
         {

@@ -79,6 +79,7 @@
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Infrastructure\OperationDetails.cs" />
     <Compile Include="Interfaces\ICollectionService.cs" />
+    <Compile Include="Interfaces\IGameService.cs" />
     <Compile Include="Interfaces\IServiceCreator.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,6 +94,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\CollectionService.cs" />
+    <Compile Include="Services\GameService.cs" />
     <Compile Include="Services\ServiceCreator.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\CreateFieldViewModel.cs" />
@@ -100,6 +102,8 @@
     <Compile Include="ViewModels\CollectionSearchViewModel.cs" />
     <Compile Include="ViewModels\CommentViewModel.cs" />
     <Compile Include="ViewModels\CustomFieldViewModel.cs" />
+    <Compile Include="ViewModels\GameIndexViewModel.cs" />
+    <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="ViewModels\ItemLikeViewModel.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\CollectionViewModel.cs" />

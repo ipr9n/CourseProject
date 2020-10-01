@@ -15,6 +15,8 @@ namespace DataAcess.EF
         public DbSet<Item> Items { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<ItemComment> itemComments { get; set; }
+        public DbSet<Game> Games { get; set; }
+        public DbSet<GameTag> GameTags { get; set; }
         public DbSet<ItemLike> itemLikes { get; set; }
         public DbSet<CustomField> CustomFields { get; set; }
 

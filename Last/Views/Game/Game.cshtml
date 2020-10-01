@@ -1,0 +1,248 @@
+﻿@using System.Web.UI.WebControls
+@model LogicLayer.ViewModels.GameViewModel
+
+
+
+@{
+    ViewBag.Title = "Game";
+}
+
+<h2>Game</h2>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <input type="hidden" value="@Model.Id" name="gameId" id="gameId" />
+            <input type="hidden" name="hdId" id="hdId" />
+            <div id="overBlock" name="overBlock" style="height: 175px; width: 235px; position: absolute; opacity: 0.5; background-color: gray; z-index: 2"></div>
+            <div id="game-krestiki-noliki">
+                <div class="game">
+                    <a href="#" class="item"></a><a href="#" class="item"></a><a href="#" class="item"></a><a href="#" class="item"></a><a href="#" class="item"></a><a href="#" class="item"></a><a href="#" class="item"></a><a href="#" class="item"></a><a href="#" class="item"></a>
+                </div>
+                <div class="win">
+                    <a class="close">x</a>
+                    <h2>Вы выиграли!</h2>
+                </div>
+                <div class="lost">
+                    <a class="close">x</a>
+                    <h2>Вы проиграли</h2>
+                </div>
+
+                <div class="draw">
+                    <a class="close">x</a>
+                    <h2>Ничья</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-info" onclick="redirectToMain()">Покинуть игру</button>
+            <div id="gameroom" name="gameroom">Ожидание игрока</div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+<script src="~/signalr/hubs"></script>
+
+<script>
+
+
+     var game = $.connection.gameHub;
+
+        $.connection.hub.start().done(function () {
+            game.server.getMyId();
+            game.server.addToGroup(@Model.Id);
+        });
+
+     $("#game-krestiki-noliki .close").on("click", redirectToMain);
+
+        game.client.addMessage = function (name, message) {
+            console.log("message");
+            if (name.length == 2) {
+                $('#gameroom').append('<p><b>' + 'Игра началась'
+                    + '</b>: ' + message + '</p>');
+            }
+        };
+
+        game.client.setId = function (id) {
+            console.log(id);
+            $('#hdId').val(id);
+        }
+
+        game.client.winCheck = function() {
+            if (znak == "1") {
+                if (checkWin(fields, 1)) {
+                    $('#overBlock').show();
+                    $("#game-krestiki-noliki .win").show(1000);
+                } else
+                    if (checkWin(fields, 2)) {
+                        $('#overBlock').show();
+                        $("#game-krestiki-noliki .lost").show(1000);
+                    } else if (checkFullStep(fields) == 0) {
+                        $('#overBlock').show();
+                        $("#game-krestiki-noliki .draw").show(1000);
+                    }
+            }
+            else if (znak == "2") {
+                if (checkWin(fields, 2)) {
+                    $('#overBlock').show();
+                    $("#game-krestiki-noliki .win").show(1000);
+                } else
+                    if (checkWin(fields, 1)) {
+                        $('#overBlock').show();
+                        $("#game-krestiki-noliki .lost").show(1000);
+                    } else if (checkFullStep(fields) == 0) {
+                        $('#overBlock').show();
+                        $("#game-krestiki-noliki .draw").show(1000);
+                    }
+            }
+    }
+
+    function redirectToMain() {
+        let form = document.createElement('form');
+        form.action = 'Index';
+        form.method = 'GET';
+
+        document.body.append(form);
+
+        form.submit();
+    }
+
+        game.client.startGame = function (users, firstId) {
+            if (firstId == $('#hdId').val()) {
+                $('#overBlock').hide();
+                znak = 1;
+                $('#gameroom').append('<p><b>' + 'Вы ходите первым'
+                    + '</b></p>');
+            }
+            else {
+                $('#overBlock').show();
+                znak = 2;
+                $('#gameroom').append('<p><b>' + 'Соперник ходит первым'
+                    + '</b></p>');
+            }
+        }
+
+        game.client.stopGame = function () {
+            let form = document.createElement('form');
+            form.action = 'EndGame';
+            form.method = 'GET';
+
+            form.innerHTML = '<input type="hidden" value="@Model.Id" name="id" id="id">';
+
+            document.body.append(form);
+
+            form.submit();
+        }
+
+        game.client.showSteps = function(steps) {
+            fields = steps;
+            showSteps();
+        }
+
+        $ = $ || jQuery;
+        var a = $(".game .item");
+        var fields; //массив исходных позиций
+        var znak = 0;
+
+        $("#game-krestiki-noliki div .next,#game-krestiki-noliki div .close").on("click", function (e) {
+            a.off("click", clickGamer);
+            e.preventDefault();
+            $(this).parents(".window").hide();
+            init();
+        });
+
+        function init() {
+            fields = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+            a.on("click", clickGamer);
+        }
+
+        function showSteps() {
+            a.each(function (i, e) {
+                $(e).html(symbol(fields[i]));
+                if (fields[i] != "0")
+                    $(e).off("click", clickGamer);
+            });
+
+            if ($('#overBlock').is(':hidden')) {
+                $('#overBlock').show();
+                $('#gameroom').append('<p><b>' + 'Ожидание хода соперника'
+                    + '</b></p>');
+            } else {
+                $('#overBlock').hide();
+                $('#gameroom').append('<p><b>' + 'Ваш ход'
+                    + '</b></p>');
+            }
+        }
+
+        function clickGamer(e) {
+            var self = this, num;
+            e.preventDefault();
+
+
+            a.each(function (i, e) {
+                if (self == e) {
+                    num = i;
+                    fields[i] = znak;
+                }
+            });
+            game.server.sendSteps(@Model.Id, fields);
+        }
+
+        function checkWin(fields, sym) {
+            var flag = true, tmp = [], sum = 0;
+
+            for (var i = 0; i < 3; i++) {
+                tmp[i] = [];
+                for (var j = 0; j < 3; j++) {
+                    tmp[i][j] = fields[i * 3 + j];
+                }
+            }
+
+            for (var i = 0; i < 3; i++) {
+                flag = true;
+                for (var j = 0; j < 3; j++) {
+                    if (tmp[i][j] != sym)
+                        flag = false;
+                }
+                if (flag) return true;
+            }
+
+
+            for (var i = 0; i < 3; i++) {
+                flag = true;
+                for (var j = 0; j < 3; j++) {
+                    if (tmp[j][i] != sym)
+                        flag = false;
+                }
+                if (flag) return true;
+            }
+
+
+            if (
+                tmp[0][0] == sym &&
+                    tmp[1][1] == sym &&
+                    tmp[2][2] == sym ||
+                    tmp[0][2] == sym &&
+                    tmp[1][1] == sym &&
+                    tmp[2][0] == sym
+            ) return true;
+        }
+
+        function checkFullStep(arr) {
+            return arr.join("").split(0).length - 1;
+        }
+
+        init();
+
+    //функция выбирающая символы для показа
+    function symbol(input) {
+        switch (input) {
+        case 0: return "";
+        case 1: return "×";
+        case 2: return "o";
+        }
+    }
+
+</script>

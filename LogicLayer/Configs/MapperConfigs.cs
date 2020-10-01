@@ -12,7 +12,7 @@ namespace LogicLayer.Configs
 {
     public static class MapperConfigs
     {
-        public static MapperConfiguration CollectionToCollectionView
+        public static MapperConfiguration MapperConfiguration
         {
             get
             {
@@ -23,10 +23,18 @@ namespace LogicLayer.Configs
                      .ForMember(x => x.Id, x => x.MapFrom(m => m.Id))
                      .ForMember(x => x.Name, x => x.MapFrom(m => m.Name));
 
-                     //cfg.CreateMap<FieldViewSettings, CollectionSetting>()
-                     //.ForMember(x => x.Id, options => options.Ignore())
-                     //.ForMember(x => x.ItemCollection, options => options.Ignore());
+                     cfg.CreateMap<GameTag, TagViewModel>()
+                         .ForMember(x => x.Id, x => x.MapFrom(m => m.Id))
+                         .ForMember(x => x.Name, x => x.MapFrom(m => m.Name));
 
+        
+                     cfg.CreateMap<Game, GameViewModel>()
+                         .ForMember(x => x.PlayersCount, x => x.MapFrom(m => m.PlayersCount))
+                         .ForMember(x => x.Title, x => x.MapFrom(m => m.Title))
+                         .ForMember(x => x.Tags,
+                             x => x.MapFrom(m => m.GameTags.Aggregate(new StringBuilder(),
+                                 (acc, item) => acc.Append($"{item.Name.ToString()} "))))
+                         .ForMember(x=>x.Id,x=>x.MapFrom(m=>m.Id));
 
                      cfg.CreateMap<ItemComment, CommentViewModel>()
                      .ForMember(x => x.AuthorName, x => x.MapFrom(m => $"{m.ApplicationUser.ClientProfile.FirstName} {m.ApplicationUser.ClientProfile.SecondName}"))
